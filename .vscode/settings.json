@@ -1,0 +1,24 @@
+{
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll.eslint",
+    "source.fixAll.stylelint"
+  ],
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[feature]": {
+    "editor.defaultFormatter": "marcosvfranco.cucumberautocomplete-behat"
+  }
+}
