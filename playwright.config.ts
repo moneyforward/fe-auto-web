@@ -10,10 +10,10 @@ import envConfig from './utils/envConfig';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const STORAGE_STATE = envConfig.storageState;
+// const STORAGE_STATE = envConfig.storageState;
 
 export default defineConfig({
-  testDir: './src/tests',
+  testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -37,14 +37,14 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+    // { name: 'setup', testMatch: /.*\.setup\.ts/ },
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: STORAGE_STATE,
+        // storageState: STORAGE_STATE,
       },
-      dependencies: ['setup'],
+      // dependencies: ['setup'],
     },
 
     // {

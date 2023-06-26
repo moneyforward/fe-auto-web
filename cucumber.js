@@ -1,10 +1,11 @@
 const config = {
-  paths: ['src/tests/features/*.feature'],
-  require: ['src/tests/step_definitions/*.ts'],
+  paths: ['tests/features/*.feature'],
+  require: ['tests/steps/**/*.ts'],
   requireModule: ['ts-node/register'],
   format: ['summary', 'progress-bar'],
   formatOptions: { snippetInterface: 'async-await' },
   publishQuiet: true,
+  parallel: 2,
 };
 
 module.exports = {

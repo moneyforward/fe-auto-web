@@ -9,10 +9,6 @@ export class SupplierPage extends CommonPage {
     this.openDrawerButton = page.getByRole('button', { name: '取引先追加' });
   }
 
-  async goToSupplierPage() {
-    await this.page.goto('/suppliers');
-  }
-
   async openCreateSupplierModal() {
     await this.openDrawerButton.click();
   }
