@@ -3,7 +3,6 @@ import {
   AfterAll,
   Before,
   BeforeAll,
-  ITestCaseHookParameter,
   setDefaultTimeout,
 } from '@cucumber/cucumber';
 import {
@@ -59,17 +58,7 @@ Before({ tags: '@debug' }, async function (this: ICustomWorld) {
   this.debug = true;
 });
 
-After(async function (this: ICustomWorld, { result }: ITestCaseHookParameter) {
-  if (result) {
-    await this.attach(
-      `Status: ${result?.status}. Duration:${result.duration?.seconds}}s`
-    );
-
-    // if (result.status === Status.FAILED) {
-    //   const image = await this.pagesObj?.basePage.screenshot('testname');
-    //   image && (await this.attach(image, 'image/png'));
-    // }
-  }
+After(async function (this: ICustomWorld) {
   await this.page?.close();
   await this.context?.close();
 });
