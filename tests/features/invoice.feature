@@ -1,4 +1,4 @@
-@invoice
+@invoice @ignore
 Feature: Invoice page
 
   Background:

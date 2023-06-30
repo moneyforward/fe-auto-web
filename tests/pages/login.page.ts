@@ -12,12 +12,11 @@ export class LoginPage extends CommonPage {
 
   constructor(page: Page) {
     super(page);
+
     this.loginWithMFid = page.locator(
       loginSelector.LOGIN_PAGE_LOGIN_WITH_BUTTON
     );
-
     this.emailInput = page.locator(loginSelector.LOGIN_PAGE_EMAIL_INPUT);
-
     this.passwordInput = page.locator(loginSelector.LOGIN_PAGE_PASSWORD_INPUT);
     this.agreeAndSignIn = page.locator(loginSelector.LOGIN_PAGE_AGREE_BUTTON);
     this.signInButton = page.locator(loginSelector.LOGIN_PAGE_SUBMIT_BUTTON);

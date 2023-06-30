@@ -18,6 +18,6 @@ export const config = {
   BASE_URL: envConfig.baseUrl,
   IMG_THRESHOLD: { threshold: 0.4 },
   BASE_API_URL: envConfig.baseUrlAPI,
-  runHeadless: false,
+  runHeadless: true,
   runSlow: 0,
 };

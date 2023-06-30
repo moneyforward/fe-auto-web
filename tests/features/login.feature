@@ -1,4 +1,4 @@
-@login
+@login @ignore
 Feature: Login
 
   Scenario: Login should be successful

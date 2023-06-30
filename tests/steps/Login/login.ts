@@ -1,6 +1,6 @@
 import { Given, Then, When } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
 import envConfig from '../../../utils/envConfig';
-import { expect } from '../../fixtures/pageFactory';
 import { LoginPage } from '../../pages/login.page';
 import pageLocator from '../../selectors/LOGIN_PAGE.json';
 import { ICustomWorld } from '../common/custom-world';

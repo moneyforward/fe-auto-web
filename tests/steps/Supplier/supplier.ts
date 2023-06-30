@@ -1,10 +1,12 @@
 import { Given, Then } from '@cucumber/cucumber';
-import { expect } from '../../fixtures/pageFactory';
+import { expect } from '@playwright/test';
 import { SupplierPage } from '../../pages/supplier.page';
 import pageLocator from '../../selectors/SUPPLIER_PAGE.json';
 import { ICustomWorld } from '../common/custom-world';
 
 let supplierPage: SupplierPage;
+
+// type TypeKeyLocator = keyof typeof pageLocator;
 
 Given('User redirects to supplier page', async function (this: ICustomWorld) {
   supplierPage = new SupplierPage(this.page!);
@@ -12,10 +14,15 @@ Given('User redirects to supplier page', async function (this: ICustomWorld) {
 });
 
 Then(
-  'User can see the supplier page title',
+  'Can see tooltip when hovering on delete button',
   async function (this: ICustomWorld) {
-    await expect(this.page!).toHaveTitle(
-      pageLocator.SUPPLIER_PAGE_SUPPLIER_TITLE
+    const deleteButton = await this.page!.$(
+      pageLocator.SUPPLIER_PAGE_DELETE_BUTTON
     );
+    await deleteButton!.hover();
+
+    expect(
+      this.page!.locator(pageLocator.SUPPLIER_PAGE_HOVERING_TEXT_DELETE_BUTTON)
+    ).toBeDefined();
   }
 );

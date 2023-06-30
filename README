@@ -1,1 +1,5 @@
-Rename .env.local to .env
+Env file: Rename .env.local to .env and change credential
+
+Extensions:
+
+- Cucumber (Gherkin) Full Support: copy setting from ./vscode/settings.json (start/end cucumberautocomplete section) into main settings.json to apply auto complete code and link function from feature file and step file.

@@ -1,5 +1,5 @@
 import { Given, Then } from '@cucumber/cucumber';
-import { expect } from '../../fixtures/pageFactory';
+import { expect } from '@playwright/test';
 import { InvoicePage } from '../../pages/invoice.page';
 import pageLocator from '../../selectors/INVOICE_PAGE.json';
 import { ICustomWorld } from '../common/custom-world';
