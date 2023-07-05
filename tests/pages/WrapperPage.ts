@@ -8,6 +8,7 @@ export default class WrapperPage {
     const pageToGoTo: string = optionalUrl
       ? envConfig.baseUrl + optionalUrl
       : envConfig.baseUrl;
+    console.log('pageToGoTo', pageToGoTo);
     await this.page.goto(pageToGoTo, { waitUntil: 'domcontentloaded' });
   }
 
