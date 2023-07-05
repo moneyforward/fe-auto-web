@@ -5,7 +5,6 @@ const config = {
   format: [
     'json:reports/report.json',
     'html:reports/report.html',
-    './reporter.js',
     'summary',
     'progress-bar',
     // '@cucumber/pretty-formatter',

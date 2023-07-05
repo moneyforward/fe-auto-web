@@ -3,7 +3,7 @@ Feature: Supplier page
 
   Background: User logged in successfully
     Given User access the system
-    When User enters the email as "nguyen.tuan.dat@moneyforward.vn" and password as "..."
+    When User enters the email as "" and password as ""
     Then It should be redirected to homepage
 
   Scenario: Verify can access Supplier list and check UI of Supplier List when have data
