@@ -23,7 +23,7 @@ commands:
             source $BASH_ENV
             message=$(echo "<<parameters.message>>" | jq -Rr @uri)
             dirName="${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
-            reportLink="https://test-report.mfvn.dev/${dirName}/serenity-summary.html"
+            reportLink="https://test-report.mfvn.dev/${dirName}/index.html"
             reportLinkDetails="https://test-report.mfvn.dev/${dirName}"
             requestParams="status=${status}&buildUrl=${CIRCLE_BUILD_URL}&message=${message}&repoName=${CIRCLE_PROJECT_REPONAME}&branch=${CIRCLE_BRANCH}&buildNum=${CIRCLE_BUILD_NUM}&jobName=${CIRCLE_JOB}&reportLink=${reportLink}&reportLinkDetails=${reportLinkDetails}&slackWebHookId=<<parameters.slackWebHookId>>"
             requestURL="${APP_SCRIPT_URL}?${requestParams}"
@@ -46,13 +46,13 @@ jobs:
           when: always
           command: |
             mkdir -p /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
-            cp -r target/site/serenity/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+            cp -r reports/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
       - run:
           name: View Logs URL
           when: always
           command: echo "https://test-report.mfvn.dev/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
       - store_artifacts:
-          path: target/site/serenity/reports/index.html
+          path: reports/index.html
       # - notify-slack:
       #     message: 'Automation Test'
       #     slackWebHookId: 'B03UUTRR2DD/xPoheT3ef07AqeKP40WSkcOn'
