@@ -1,19 +1,8 @@
 version: 2.1
 
 orbs:
-  continuation: circleci/continuation@0.1.2
+  node: circleci/node@5.0.3
 commands:
-  cmd_env:
-    steps:
-      - restore_cache:
-          key: app-cache-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install
-      - save_cache:
-          key: app-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
   notify-slack:
     parameters:
       message:
@@ -29,30 +18,32 @@ commands:
           name: Detecting job status (FAIL)
           command: echo "status=danger" >> $BASH_ENV
           when: on_fail
-      # - run:
-      #     name: Sending Notification to slack
-      #     when: always
-      #     command: |
-      #       source $BASH_ENV
-      #       message=$(echo "<<parameters.message>>" | jq -Rr @uri)
-      #       dirName="${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
-      #       reportLink="https://test-report.mfvn.dev/${dirName}/serenity-summary.html"
-      #       reportLinkDetails="https://test-report.mfvn.dev/${dirName}"
-      #       requestParams="status=${status}&buildUrl=${CIRCLE_BUILD_URL}&message=${message}&repoName=${CIRCLE_PROJECT_REPONAME}&branch=${CIRCLE_BRANCH}&buildNum=${CIRCLE_BUILD_NUM}&jobName=${CIRCLE_JOB}&reportLink=${reportLink}&reportLinkDetails=${reportLinkDetails}&slackWebHookId=<<parameters.slackWebHookId>>"
-      #       requestURL="${APP_SCRIPT_URL}?${requestParams}"
-      #       curl -L -X GET "${requestURL}"
+      - run:
+          name: Sending Notification to slack
+          when: always
+          command: |
+            source $BASH_ENV
+            message=$(echo "<<parameters.message>>" | jq -Rr @uri)
+            dirName="${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
+            reportLink="https://test-report.mfvn.dev/${dirName}/serenity-summary.html"
+            reportLinkDetails="https://test-report.mfvn.dev/${dirName}"
+            requestParams="status=${status}&buildUrl=${CIRCLE_BUILD_URL}&message=${message}&repoName=${CIRCLE_PROJECT_REPONAME}&branch=${CIRCLE_BRANCH}&buildNum=${CIRCLE_BUILD_NUM}&jobName=${CIRCLE_JOB}&reportLink=${reportLink}&reportLinkDetails=${reportLinkDetails}&slackWebHookId=<<parameters.slackWebHookId>>"
+            requestURL="${APP_SCRIPT_URL}?${requestParams}"
+            curl -L -X GET "${requestURL}"
+
 jobs:
   kl-automation-test:
+    executor:
+      - node/default
     machine: true
     resource_class: moneyforwardvietnam/qa-runner
     steps:
       - checkout
-      - cmd_env
-      - run: npm i -D @playwright/test
-      - run: npx playwright install chrome
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           name: 'Run automation test'
-          command: 'npm test'
+          command: 'yarn test'
       - run:
           name: Copy reports result to public folder
           when: always
