@@ -1,6 +1,19 @@
 version: 2.1
 
+orbs:
+  continuation: circleci/continuation@0.1.2
 commands:
+  cmd_env:
+    steps:
+      - restore_cache:
+          key: app-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: app-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
   notify-slack:
     parameters:
       message:
@@ -34,6 +47,7 @@ jobs:
     resource_class: moneyforwardvietnam/qa-runner
     steps:
       - checkout
+      - cmd_env
       - run: npm i -D @playwright/test
       - run: npx playwright install chrome
       - run:
