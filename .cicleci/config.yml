@@ -1,0 +1,70 @@
+version: 2.1
+
+commands:
+  notify-slack:
+    parameters:
+      message:
+        type: string
+      slackWebHookId:
+        type: string
+    steps:
+      - run:
+          name: Detecting job status (PASS)
+          command: echo "status=good" >> $BASH_ENV
+          when: on_success
+      - run:
+          name: Detecting job status (FAIL)
+          command: echo "status=danger" >> $BASH_ENV
+          when: on_fail
+      - run:
+          name: Sending Notification to slack
+          when: always
+          command: |
+            source $BASH_ENV
+            message=$(echo "<<parameters.message>>" | jq -Rr @uri)
+            dirName="${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
+            reportLink="https://test-report.mfvn.dev/${dirName}/serenity-summary.html"
+            reportLinkDetails="https://test-report.mfvn.dev/${dirName}"
+            requestParams="status=${status}&buildUrl=${CIRCLE_BUILD_URL}&message=${message}&repoName=${CIRCLE_PROJECT_REPONAME}&branch=${CIRCLE_BRANCH}&buildNum=${CIRCLE_BUILD_NUM}&jobName=${CIRCLE_JOB}&reportLink=${reportLink}&reportLinkDetails=${reportLinkDetails}&slackWebHookId=<<parameters.slackWebHookId>>"
+            requestURL="${APP_SCRIPT_URL}?${requestParams}"
+            curl -L -X GET "${requestURL}"
+jobs:
+  iv-automation-test:
+    machine: true
+    resource_class: moneyforwardvietnam/qa-runner
+    steps:
+      - checkout
+      - run:
+          name: Check versions
+          command: |
+            mvn -v
+            java -version
+            google-chrome --version
+            chromedriver --version
+      - run:
+          name: 'Run automation test'
+          command: 'mvn clean verify -Dcucumber.filter.tags="@regression" -Dheadless.mode=true'
+      - run:
+          name: Copy reports result to public folder
+          when: always
+          command: |
+            mkdir -p /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+            cp -r target/site/serenity/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+      - run:
+          name: View Logs URL
+          when: always
+          command: echo "https://test-report.mfvn.dev/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
+      - store_artifacts:
+          path: target/site/serenity/serenity-summary.html
+      - notify-slack:
+          message: '[IV] Automation Test'
+          slackWebHookId: 'B03UUTRR2DD/xPoheT3ef07AqeKP40WSkcOn'
+
+workflows:
+  iv-workflow:
+    jobs:
+      - iv-automation-test:
+          filters:
+            branches:
+              only:
+                - IV
