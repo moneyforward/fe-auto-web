@@ -45,7 +45,7 @@ jobs:
           name: Copy reports result to public folder
           when: always
           command: |
-            mkdir -p /var/www/html/${ }_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+            mkdir -p /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
             cp -r target/site/serenity/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
       - run:
           name: View Logs URL
