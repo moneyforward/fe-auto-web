@@ -54,13 +54,12 @@ jobs:
       - store_artifacts:
           path: target/site/playwright/reports/index.html
       # - notify-slack:
-      #     message: '[Klavis] Automation Test'
+      #     message: 'Automation Test'
       #     slackWebHookId: 'B03UUTRR2DD/xPoheT3ef07AqeKP40WSkcOn'
 
 workflows:
   kl-workflow:
     jobs:
-      - install-node
       - kl-automation-test:
           filters:
             branches:
