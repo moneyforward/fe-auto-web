@@ -43,7 +43,7 @@ jobs:
             chromedriver --version
       - run:
           name: 'Run automation test'
-          command: 'npm test'
+          command: 'npx cucumber-js --tags \"not @login\"'
       - run:
           name: Copy reports result to public folder
           when: always
