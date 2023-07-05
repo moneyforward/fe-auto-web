@@ -16,9 +16,9 @@ const browserOptions: LaunchOptions = {
 };
 
 export const envConfig = {
-  email: process.env.EMAIL || '',
-  password: process.env.PASSWORD || '',
-  baseUrl: process.env.BASE_URL || '',
+  email: process.env.EMAIL || 'nguyen.tuan.dat@moneyforward.vn',
+  password: process.env.PASSWORD || 'iLR0x@zPE6NT',
+  baseUrl: process.env.BASE_URL || 'https://payable-invoice.test.mfw.work',
   baseUrlAPI: process.env.BASE_URL_API || '',
 };
 
@@ -26,6 +26,6 @@ export const config = {
   browser: process.env.browser || 'chromium',
   browserOptions,
   IMG_THRESHOLD: { threshold: 0.4 },
-  runHeadless: process.env.HEADLESS_MODE === 'TRUE',
+  runHeadless: process.env.HEADLESS_MODE || true,
   runSlow: 0,
 };
