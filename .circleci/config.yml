@@ -34,16 +34,11 @@ jobs:
     resource_class: moneyforwardvietnam/qa-runner
     steps:
       - checkout
-      - run:
-          name: Check versions
-          command: |
-            mvn -v
-            java -version
-            google-chrome --version
-            chromedriver --version
+      - run: npm i -D @playwright/test
+      - run: npx playwright install chrome
       - run:
           name: 'Run automation test'
-          command: 'npx cucumber-js --tags \"not @login\"'
+          command: 'npm test'
       - run:
           name: Copy reports result to public folder
           when: always
