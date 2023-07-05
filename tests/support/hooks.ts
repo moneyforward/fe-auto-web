@@ -3,9 +3,11 @@ import {
   AfterAll,
   Before,
   BeforeAll,
+  Status,
   setDefaultTimeout,
 } from '@cucumber/cucumber';
 import {
+  BrowserContext,
   ChromiumBrowser,
   FirefoxBrowser,
   WebKitBrowser,
@@ -15,10 +17,13 @@ import {
 } from '@playwright/test';
 import { config } from './config';
 import { ICustomWorld } from './custom-world';
+import { fixture } from './fixture';
 
 let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
+let context: BrowserContext;
 setDefaultTimeout(60 * 1000);
 
+// BeforeAll run before any scenario is run.
 BeforeAll(async function () {
   const commonBrowserOptions = {
     ...config.browserOptions,
@@ -44,9 +49,15 @@ BeforeAll(async function () {
   }
 });
 
+// Before hooks run before the first step of each scenario
 Before(async function (this: ICustomWorld) {
-  this.context = await browser.newContext();
-  this.page = await this.context.newPage();
+  context = await browser.newContext({
+    // recordVideo: {
+    //   dir: 'test-results/videos',
+    // },
+  });
+  const page = await context.newPage();
+  fixture.page = page;
 });
 
 Before({ tags: '@ignore' }, async function () {
@@ -58,11 +69,21 @@ Before({ tags: '@debug' }, async function (this: ICustomWorld) {
   this.debug = true;
 });
 
-After(async function (this: ICustomWorld) {
-  await this.page?.close();
-  await this.context?.close();
+// After hooks run after the last step of each scenario, even when the step result is failed, undefined, pending, or skipped.
+After(async function ({ pickle, result }) {
+  if (result?.status === Status.FAILED) {
+    // using AfterStep to take a screenshot after each step
+    const img = await fixture.page.screenshot({
+      path: `./test-results/screenshots/${pickle.name}.png`,
+      type: 'png',
+    });
+    this.attach(img, 'image/png');
+  }
+  await fixture.page.close();
+  await context.close();
 });
 
+// AfterAll run after all scenarios have been executed.
 AfterAll(async function () {
   await browser.close();
 });

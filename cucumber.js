@@ -1,11 +1,19 @@
 const config = {
-  paths: ['tests/features/*.feature'],
-  require: ['tests/steps/**/*.ts'],
-  requireModule: ['ts-node/register'],
-  format: ['summary', 'progress-bar'],
+  paths: ['tests/features/'],
+  require: ['tests/support/hooks.ts', 'tests/steps/**/*.ts'],
+  requireModule: ['ts-node/register'], // ts-node/register: solve the ts-import statement error
+  format: [
+    'json:reports/report.json',
+    'html:reports/report.html',
+    './reporter.js',
+    'summary',
+    'progress-bar',
+    // '@cucumber/pretty-formatter',
+  ],
   formatOptions: { snippetInterface: 'async-await' },
   publishQuiet: true,
-  parallel: 2,
+  dryRun: false,
+  parallel: 1,
 };
 
 module.exports = {

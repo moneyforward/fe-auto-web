@@ -1,25 +1,32 @@
-import { Given, Then, When } from '@cucumber/cucumber';
+import { Before, Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import envConfig from '../../../utils/envConfig';
-import { LoginPage } from '../../pages/login.page';
-import pageLocator from '../../selectors/LOGIN_PAGE.json';
-import { ICustomWorld } from '../common/custom-world';
+import pageLocator from '../../locators/LOGIN_PAGE.json';
+import { LoginPage } from '../../pages/LoginPage';
+import { envConfig } from '../../support/config';
+import { fixture } from '../../support/fixture';
 
 let loginPage: LoginPage;
-Given('User access the system', async function (this: ICustomWorld) {
-  loginPage = new LoginPage(this.page!);
-  await loginPage.goToPage('/auth/login');
+Before(() => {});
+
+Given('User access the system', async function () {
+  loginPage = new LoginPage(fixture.page);
+  await loginPage.goToPage();
+  await expect(fixture.page).toHaveTitle(pageLocator.LOGIN_PAGE_TITLE);
 });
 
-When('User enters the email and password', async function (this: ICustomWorld) {
-  await loginPage.login(envConfig.email, envConfig.password);
-});
-
-Then(
-  'It should be redirected to homepage',
-  async function (this: ICustomWorld) {
-    await expect(this.page!).toHaveTitle(
-      pageLocator.LOGIN_PAGE_HOME_PAGE_TITLE
+When(
+  'User enters the email as {string} and password as {string}',
+  async function (email: string, password: string) {
+    await loginPage.login(
+      email || envConfig.email,
+      password || envConfig.password
     );
   }
 );
+
+Then('It should be redirected to homepage', async function () {
+  await fixture.page.waitForLoadState();
+  await expect(fixture.page).toHaveTitle(
+    pageLocator.LOGIN_PAGE_HOME_PAGE_TITLE
+  );
+});

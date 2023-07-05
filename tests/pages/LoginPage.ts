@@ -1,0 +1,44 @@
+import { Locator, Page } from '@playwright/test';
+import loginSelector from '../locators/LOGIN_PAGE.json';
+import { envConfig } from '../support/config';
+import WrapperPage from './WrapperPage';
+
+export class LoginPage {
+  private base: WrapperPage;
+  readonly loginWithMFid: Locator;
+  readonly emailInput: Locator;
+  readonly passwordInput: Locator;
+  readonly agreeAndSignIn: Locator;
+  readonly signInButton: Locator;
+
+  constructor(private page: Page) {
+    this.base = new WrapperPage(page);
+    this.loginWithMFid = this.page.locator(
+      loginSelector.LOGIN_PAGE_LOGIN_WITH_BUTTON
+    );
+    this.emailInput = this.page.locator(loginSelector.LOGIN_PAGE_EMAIL_INPUT);
+    this.passwordInput = this.page.locator(
+      loginSelector.LOGIN_PAGE_PASSWORD_INPUT
+    );
+    this.agreeAndSignIn = this.page.locator(
+      loginSelector.LOGIN_PAGE_AGREE_BUTTON
+    );
+    this.signInButton = this.page.locator(
+      loginSelector.LOGIN_PAGE_SUBMIT_BUTTON
+    );
+  }
+
+  async goToPage() {
+    await this.base.goToPage('/auth/login');
+  }
+
+  async login(email: string, password: string) {
+    this.page.click(loginSelector.LOGIN_PAGE_LOGIN_WITH_BUTTON);
+    await this.loginWithMFid.click();
+    await this.emailInput.fill(email);
+    await this.agreeAndSignIn.click();
+    await this.passwordInput.fill(password);
+    await this.signInButton.click();
+    await this.page.waitForURL(envConfig.baseUrl);
+  }
+}

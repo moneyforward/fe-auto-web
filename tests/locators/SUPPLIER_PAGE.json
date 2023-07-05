@@ -27,5 +27,6 @@
     "SUPPLIER_PAGE_TABLE_HEADER_RECEIVER_PIC_NAME": "//div//table//thead//th[text()='受取担当者']",
     "SUPPLIER_PAGE_TABLE_HEADER_MAIN_PAYMENT_METHOD": "//div//table//thead//th[text()='メインの支払方法']",
     "SUPPLIER_PAGE_TABLE_HEADER_INVITATION_STATUS": "//div//table//thead//th[text()='招待ステータス']",
-    "SUPPLIER_PAGE_TABLE_DATA_EMPTY_MESSAGE": "//div//table//tr//div[text()='データが存在しません']"
+    "SUPPLIER_PAGE_TABLE_DATA_EMPTY_MESSAGE": "//div//table//tr//div[text()='データが存在しません']",
+    "SUPPLIER_PAGE_TABLE_DATA": "//div//table//tbody//tr"
 }
