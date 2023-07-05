@@ -55,7 +55,7 @@ jobs:
           path: reports/index.html
       # - notify-slack:
       #     message: 'Automation Test'
-      #     slackWebHookId: 'B03UUTRR2DD/xPoheT3ef07AqeKP40WSkcOn'
+      #     slackWebHookId: 'B05FH8MAH8D/Ym1j8Q1QGUrFMSN2jEDOZFp3'
 
 workflows:
   kl-workflow:
