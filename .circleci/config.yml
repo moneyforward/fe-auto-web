@@ -6,12 +6,12 @@ commands:
   cmd_env:
     steps:
       - restore_cache:
-          key: app-cache-{{ checksum "package-lock.json" }}
+          key: app-cache-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: npm install
+          command: yarn install
       - save_cache:
-          key: app-cache-{{ checksum "package-lock.json" }}
+          key: app-cache-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
   notify-slack:
