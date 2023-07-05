@@ -30,9 +30,7 @@ commands:
             requestParams="status=${status}&buildUrl=${CIRCLE_BUILD_URL}&message=${message}&repoName=${CIRCLE_PROJECT_REPONAME}&branch=${CIRCLE_BRANCH}&buildNum=${CIRCLE_BUILD_NUM}&jobName=${CIRCLE_JOB}&reportLink=${reportLink}&reportLinkDetails=${reportLinkDetails}&slackWebHookId=<<parameters.slackWebHookId>>"
             requestURL="${APP_SCRIPT_URL}?${requestParams}"
             curl -L -X GET "${requestURL}"
-
-jobs:
-  install-node-example:
+  install-node:
     docker:
       - image: circleci/node:latest
     steps:
@@ -40,11 +38,14 @@ jobs:
       - restore_cache:
           keys:
             - npm-cache-{{ checksum "package-lock.json" }}
+
+jobs:
   kl-automation-test:
     machine: true
     resource_class: moneyforwardvietnam/qa-runner
     steps:
       - checkout
+      - install-node
       - run:
           name: 'Run automation test'
           command: 'npm test'
@@ -67,7 +68,7 @@ jobs:
 workflows:
   kl-workflow:
     jobs:
-      - install-node-example
+      - install-node
       - kl-automation-test:
           filters:
             branches:
