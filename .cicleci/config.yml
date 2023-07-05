@@ -1,0 +1,33 @@
+version: 2.1
+
+commands:
+  jobs:
+    kl-automation-test:
+      machine: true
+      resource_class: moneyforwardvietnam/qa-runner
+      steps:
+        - checkout
+        - run:
+            name: Check versions
+            command: google-chrome --version
+        - run:
+            name: 'Run automation test'
+            command: 'npx cucumber-js --tags="not @login" --publish'
+        - run:
+            name: View logs URL
+            when: always
+            command: echo "http://...."
+        - store_artifacts:
+            path: target/site/serenity/serenity-summary.html
+        - notify-slack:
+            message: '[IV] Automation Test'
+            slackWebHookId: 'B03UUTRR2DD/xPoheT3ef07AqeKP40WSkcOn'
+
+workflows:
+  kl-workflow:
+    jobs:
+      - kl-automation-test:
+          filters:
+            branches:
+              only:
+                - IV
