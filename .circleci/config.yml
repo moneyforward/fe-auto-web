@@ -1,7 +1,5 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.3
 commands:
   notify-slack:
     parameters:
@@ -30,22 +28,16 @@ commands:
             requestParams="status=${status}&buildUrl=${CIRCLE_BUILD_URL}&message=${message}&repoName=${CIRCLE_PROJECT_REPONAME}&branch=${CIRCLE_BRANCH}&buildNum=${CIRCLE_BUILD_NUM}&jobName=${CIRCLE_JOB}&reportLink=${reportLink}&reportLinkDetails=${reportLinkDetails}&slackWebHookId=<<parameters.slackWebHookId>>"
             requestURL="${APP_SCRIPT_URL}?${requestParams}"
             curl -L -X GET "${requestURL}"
-  install-node:
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - npm-cache-{{ checksum "package-lock.json" }}
 
 jobs:
   kl-automation-test:
-    machine: true
-    resource_class: moneyforwardvietnam/qa-runner
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.23.1-focal
     steps:
       - checkout
-      - install-node
+      - run: npm i -D @playwright/test
+      - run: npx playwright install
+      - run: npx playwright install chrome
       - run:
           name: 'Run automation test'
           command: 'npm test'
