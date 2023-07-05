@@ -45,14 +45,14 @@ jobs:
           name: Copy reports result to public folder
           when: always
           command: |
-            mkdir -p /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
-            cp -r target/site/playwright/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+            mkdir -p /var/www/html/${ }_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+            cp -r target/site/serenity/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
       - run:
           name: View Logs URL
           when: always
           command: echo "https://test-report.mfvn.dev/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
       - store_artifacts:
-          path: target/site/playwright/reports/index.html
+          path: target/site/serenity/reports/index.html
       # - notify-slack:
       #     message: 'Automation Test'
       #     slackWebHookId: 'B03UUTRR2DD/xPoheT3ef07AqeKP40WSkcOn'
