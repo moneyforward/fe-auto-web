@@ -3,7 +3,7 @@ const report = require('multiple-cucumber-html-reporter');
 report.generate({
   jsonDir: 'test-results',
   reportPath: 'test-results/reports',
-  pageTitle: 'Playwright Automation Test',
+  pageTitle: 'Klavis - Automation Test Results',
   metadata: {
     browser: {
       name: 'chrome',
