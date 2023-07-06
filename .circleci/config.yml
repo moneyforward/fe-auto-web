@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.1.0
+  node: circleci/node@5.1.0
 
 commands:
   notify-slack:
@@ -51,13 +51,13 @@ jobs:
           when: always
           command: |
             mkdir -p /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
-            cp -r reports/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+            cp -r /var/opt/circleci/workdir/reports/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
       - run:
           name: View Logs URL
           when: always
           command: echo "https://test-report.mfvn.dev/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
       - store_artifacts:
-          path: reports/index.html
+          path: /var/opt/circleci/workdir/reports/index.html
       # - notify-slack:
       #     message: 'Automation Test'
       #     slackWebHookId: 'B05FH8MAH8D/Ym1j8Q1QGUrFMSN2jEDOZFp3'
