@@ -26,6 +26,6 @@ export const config = {
   browser: process.env.browser || 'chromium',
   browserOptions,
   IMG_THRESHOLD: { threshold: 0.4 },
-  runHeadless: process.env.HEADLESS_MODE === 'TRUE' || true,
+  runHeadless: false,
   runSlow: 0,
 };

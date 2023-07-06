@@ -1,7 +1,7 @@
 @ui @supplier @supplier_list
 Feature: Supplier page
 
-  Scenario Outline: User logged in successfully
+  Background: User logged in successfully
     Given User access the system
     When User enters the email as "" and password as ""
     Then It should be redirected to homepage

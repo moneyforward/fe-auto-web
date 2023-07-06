@@ -67,9 +67,9 @@ Before('@auth', async function ({ pickle }) {
 // Before hooks run before the first step of each scenario
 Before(async function () {
   context = await browser.newContext({
-    // recordVideo: {
-    //   dir: 'test-results/videos',
-    // },
+    recordVideo: {
+      dir: 'test-results/videos',
+    },
   });
   const page = await context.newPage();
   fixture.page = page;
