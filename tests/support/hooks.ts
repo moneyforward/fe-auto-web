@@ -15,8 +15,9 @@ import {
   firefox,
   webkit,
 } from '@playwright/test';
+import { createLogger } from 'winston';
+import { options } from '../helper/utils/logger';
 import { config } from './config';
-import { ICustomWorld } from './custom-world';
 import { fixture } from './fixture';
 
 let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
@@ -49,8 +50,22 @@ BeforeAll(async function () {
   }
 });
 
+// It will trigger for auth scenarios
+Before('@auth', async function ({ pickle }) {
+  const scenarioName = pickle.name + pickle.id;
+  context = await browser.newContext({
+    storageState: getStorageState(pickle.name),
+    recordVideo: {
+      dir: 'test-results/videos',
+    },
+  });
+  const page = await context.newPage();
+  fixture.page = page;
+  fixture.logger = createLogger(options(scenarioName));
+});
+
 // Before hooks run before the first step of each scenario
-Before(async function (this: ICustomWorld) {
+Before(async function () {
   context = await browser.newContext({
     // recordVideo: {
     //   dir: 'test-results/videos',
@@ -63,10 +78,6 @@ Before(async function (this: ICustomWorld) {
 Before({ tags: '@ignore' }, async function () {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return 'skipped' as any;
-});
-
-Before({ tags: '@debug' }, async function (this: ICustomWorld) {
-  this.debug = true;
 });
 
 // After hooks run after the last step of each scenario, even when the step result is failed, undefined, pending, or skipped.
@@ -87,3 +98,24 @@ After(async function ({ pickle, result }) {
 AfterAll(async function () {
   await browser.close();
 });
+
+type TStorage = {
+  cookies: {
+    name: string;
+    value: string;
+    domain: string;
+    path: string;
+    expires: number;
+    httpOnly: boolean;
+    secure: boolean;
+    sameSite: 'Strict' | 'Lax' | 'None';
+  }[];
+  origins: {
+    origin: string;
+    localStorage: { name: string; value: string }[];
+  }[];
+};
+function getStorageState(user: string): string | TStorage {
+  if (user.endsWith('user')) return 'tests/helper/auth/user.json';
+  return '';
+}

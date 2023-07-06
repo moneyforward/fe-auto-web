@@ -31,8 +31,9 @@ commands:
 
 jobs:
   kl-automation-test:
-    docker:
-      - image: mcr.microsoft.com/playwright:v1.23.1-focal
+    machine:
+      image: mcr.microsoft.com/playwright:v1.23.1-focal
+    resource_class: moneyforwardvietnam/qa-automation
     steps:
       - checkout
       - run: npm i -D @playwright/test
