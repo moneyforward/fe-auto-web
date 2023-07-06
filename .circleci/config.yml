@@ -31,8 +31,7 @@ commands:
 
 jobs:
   kl-automation-test:
-    machine:
-      image: mcr.microsoft.com/playwright:v1.23.1-focal
+    machine: true
     resource_class: moneyforwardvietnam/qa-automation
     steps:
       - checkout
