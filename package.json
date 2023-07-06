@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "pretest": "npx ts-node tests/helper/report/init.ts",
+        "pretest": "npx ts-node src/helper/report/init.ts",
         "test": "npx cucumber-js --tags \"not @login\" || true",
-        "posttest": "npx ts-node tests/helper/report/report.ts"
+        "posttest": "npx ts-node src/helper/report/report.ts"
     },
     "keywords": [],
     "author": "Melvin",

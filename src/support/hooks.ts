@@ -116,6 +116,6 @@ type TStorage = {
   }[];
 };
 function getStorageState(user: string): string | TStorage {
-  if (user.endsWith('user')) return 'tests/helper/auth/user.json';
+  if (user.endsWith('user')) return 'src/helper/auth/user.json';
   return '';
 }

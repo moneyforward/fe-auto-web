@@ -22,10 +22,14 @@ export const envConfig = {
   baseUrlAPI: process.env.BASE_URL_API || '',
 };
 
+const isHeadlessMode = process.env.HEADLESS_MODE
+  ? process.env.HEADLESS_MODE === 'TRUE'
+  : true;
+
 export const config = {
   browser: process.env.browser || 'chromium',
   browserOptions,
   IMG_THRESHOLD: { threshold: 0.4 },
-  runHeadless: false,
+  runHeadless: isHeadlessMode,
   runSlow: 0,
 };

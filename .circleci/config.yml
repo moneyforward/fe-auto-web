@@ -51,7 +51,7 @@ jobs:
           when: always
           command: |
             mkdir -p /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
-            cp -r /var/opt/circleci/workdir/test-results/reports/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
+            cp -R /var/opt/circleci/workdir/test-results/reports/* /var/www/html/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}
       - run:
           name: View Logs URL
           when: always

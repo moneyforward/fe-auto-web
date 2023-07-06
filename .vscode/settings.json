@@ -30,19 +30,19 @@
   ],
   // start: cucumber setting
 
-  "cucumber.features": ["tests/features/*.feature"],
-  "cucumber.glue": ["tests/steps/**/*.ts"],
+  "cucumber.features": ["src/features/*.feature"],
+  "cucumber.glue": ["src/steps/**/*.ts"],
 
-  // "cucumber.features": ["tests/features/*.feature"],
-  // "cucumber.glue": ["tests/steps/**/*.ts"],
+  // "cucumber.features": ["src/features/*.feature"],
+  // "cucumber.glue": ["src/steps/**/*.ts"],
   // start: cucumber setting
   "editor.quickSuggestions": {
     "comments": false,
     "strings": true,
     "other": true
   },
-  "cucumberautocomplete.steps": ["tests/steps/**/*.ts"],
-  "cucumberautocomplete.syncfeatures": "tests/features/*.feature",
+  "cucumberautocomplete.steps": ["src/steps/**/*.ts"],
+  "cucumberautocomplete.syncfeatures": "src/features/*.feature",
   "cucumberautocomplete.strictGherkinCompletion": true,
   "cucumberautocomplete.customParameters": [
     {
