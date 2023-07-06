@@ -32,14 +32,15 @@ commands:
 jobs:
   kl-automation-test:
     # machine: true
+    resource_class: moneyforwardvietnam/qa-runner
     docker:
       - image: cimg/node:20.4.0
-    resource_class: moneyforwardvietnam/qa-runner
     steps:
       - checkout
-      # - run: npm i -D @playwright/test
-      # - run: npx playwright install
-      # - run: npx playwright install chrome
+      - run: node --version
+      - run: npm i -D @playwright/test
+      - run: npx playwright install
+      - run: npx playwright install chrome
       - run:
           name: 'Run automation test'
           command: 'npm test'
