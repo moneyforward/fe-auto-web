@@ -32,7 +32,7 @@ commands:
 jobs:
   kl-automation-test:
     machine: true
-    resource_class: moneyforwardvietnam/qa-automation
+    resource_class: moneyforwardvietnam/qa-runner
     steps:
       - checkout
       # - run: npm i -D @playwright/test
