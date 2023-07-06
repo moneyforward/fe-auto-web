@@ -35,9 +35,9 @@ jobs:
     resource_class: moneyforwardvietnam/qa-automation
     steps:
       - checkout
-      - run: npm i -D @playwright/test
-      - run: npx playwright install
-      - run: npx playwright install chrome
+      # - run: npm i -D @playwright/test
+      # - run: npx playwright install
+      # - run: npx playwright install chrome
       - run:
           name: 'Run automation test'
           command: 'npm test'
