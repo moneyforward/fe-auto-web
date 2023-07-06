@@ -58,9 +58,9 @@ jobs:
           command: echo "https://test-report.mfvn.dev/${CIRCLE_PROJECT_REPONAME}_${CIRCLE_BRANCH}_${CIRCLE_BUILD_NUM}"
       - store_artifacts:
           path: /var/opt/circleci/workdir/test-results/reports/index.html
-      # - notify-slack:
-      #     message: 'Automation Test'
-      #     slackWebHookId: 'B05FH8MAH8D/Ym1j8Q1QGUrFMSN2jEDOZFp3'
+      - notify-slack:
+          message: 'Automation Test'
+          slackWebHookId: 'B05FH8MAH8D/Ym1j8Q1QGUrFMSN2jEDOZFp3'
 
 workflows:
   kl-workflow:
