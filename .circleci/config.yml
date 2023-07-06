@@ -31,7 +31,9 @@ commands:
 
 jobs:
   kl-automation-test:
-    machine: true
+    # machine: true
+    docker:
+      - image: cimg/node:20.4.0
     resource_class: moneyforwardvietnam/qa-runner
     steps:
       - checkout
