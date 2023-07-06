@@ -29,12 +29,23 @@ commands:
             requestURL="${APP_SCRIPT_URL}?${requestParams}"
             curl -L -X GET "${requestURL}"
 
+executors:
+  playwright:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.34.0-focal
+  python:
+    docker:
+      - image: cimg/python:3.11
+
 jobs:
   kl-automation-test:
     # machine: true
     # resource_class: moneyforwardvietnam/qa-runner
-    docker:
-      - image: cimg/node:20.4.0
+    # docker:
+    #   - image: cimg/node:18.16.1
+
+    circleci_ip_ranges: true
+    executor: playwright
     steps:
       - checkout
       - run: node --version
