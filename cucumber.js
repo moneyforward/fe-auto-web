@@ -11,7 +11,7 @@ const config = {
   formatOptions: { snippetInterface: 'async-await' },
   publishQuiet: true,
   dryRun: false,
-  parallel: 1,
+  parallel: 2,
 };
 
 module.exports = {

@@ -70,4 +70,4 @@ workflows:
             branches:
               only:
                 - main
-                - update-setting-v.0.1
+                # - update-setting-v.0.1

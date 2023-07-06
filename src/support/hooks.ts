@@ -54,7 +54,7 @@ BeforeAll(async function () {
 Before('@auth', async function ({ pickle }) {
   const scenarioName = pickle.name + pickle.id;
   context = await browser.newContext({
-    storageState: getStorageState(pickle.name),
+    storageState: getStorageState(),
     recordVideo: {
       dir: 'test-results/videos',
     },
@@ -115,7 +115,7 @@ type TStorage = {
     localStorage: { name: string; value: string }[];
   }[];
 };
-function getStorageState(user: string): string | TStorage {
-  if (user.endsWith('user')) return 'src/helper/auth/user.json';
-  return '';
+function getStorageState(): string | TStorage {
+  console.log('log user');
+  return 'src/helper/auth/user.json';
 }

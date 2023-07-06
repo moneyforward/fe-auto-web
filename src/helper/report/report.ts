@@ -4,6 +4,7 @@ report.generate({
   jsonDir: 'test-results',
   reportPath: 'test-results/reports',
   pageTitle: 'Klavis - Automation Test Results',
+  reportName: 'Klavis - HTML Reporter',
   metadata: {
     browser: {
       name: 'chrome',
