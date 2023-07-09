@@ -7,7 +7,6 @@ import {
   setDefaultTimeout,
 } from '@cucumber/cucumber';
 import {
-  BrowserContext,
   ChromiumBrowser,
   FirefoxBrowser,
   WebKitBrowser,
@@ -15,16 +14,13 @@ import {
   firefox,
   webkit,
 } from '@playwright/test';
-import { createLogger } from 'winston';
-import { options } from '../helper/utils/logger';
+import fs from 'fs';
 import { config } from './config';
-import { fixture } from './fixture';
+import { ICustomWorld } from './custom-world';
 
 let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
-let context: BrowserContext;
 setDefaultTimeout(60 * 1000);
 
-// BeforeAll run before any scenario is run.
 BeforeAll(async function () {
   const commonBrowserOptions = {
     ...config.browserOptions,
@@ -50,72 +46,56 @@ BeforeAll(async function () {
   }
 });
 
-// It will trigger for auth scenarios
-Before('@auth', async function ({ pickle }) {
-  const scenarioName = pickle.name + pickle.id;
-  context = await browser.newContext({
+Before(async function (this: ICustomWorld) {
+  this.context = await browser.newContext({
+    recordVideo: {
+      dir: 'test-results/videos',
+    },
+  });
+  const page = await this.context.newPage();
+  this.page = page;
+});
+
+Before({ tags: '@auth' }, async function (this: ICustomWorld) {
+  this.context = await browser.newContext({
     storageState: getStorageState(),
     recordVideo: {
       dir: 'test-results/videos',
     },
   });
-  const page = await context.newPage();
-  fixture.page = page;
-  fixture.logger = createLogger(options(scenarioName));
-});
-
-// Before hooks run before the first step of each scenario
-Before(async function () {
-  context = await browser.newContext({
-    recordVideo: {
-      dir: 'test-results/videos',
-    },
-  });
-  const page = await context.newPage();
-  fixture.page = page;
+  const page = await this.context.newPage();
+  this.page = page;
 });
 
 Before({ tags: '@ignore' }, async function () {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return 'skipped' as any;
+  return 'skipped';
 });
 
-// After hooks run after the last step of each scenario, even when the step result is failed, undefined, pending, or skipped.
-After(async function ({ pickle, result }) {
+Before({ tags: '@debug' }, async function () {
+  this.debug = true;
+});
+
+After(async function (this: ICustomWorld, { pickle, result }) {
   if (result?.status === Status.FAILED) {
-    // using AfterStep to take a screenshot after each step
-    const img = await fixture.page.screenshot({
+    const img = await this.page!.screenshot({
       path: `./test-results/screenshots/${pickle.name}.png`,
       type: 'png',
     });
     this.attach(img, 'image/png');
   }
-  await fixture.page.close();
-  await context.close();
+  await this.page!.close();
+  await this.context!.close();
 });
 
-// AfterAll run after all scenarios have been executed.
 AfterAll(async function () {
   await browser.close();
 });
 
-type TStorage = {
-  cookies: {
-    name: string;
-    value: string;
-    domain: string;
-    path: string;
-    expires: number;
-    httpOnly: boolean;
-    secure: boolean;
-    sameSite: 'Strict' | 'Lax' | 'None';
-  }[];
-  origins: {
-    origin: string;
-    localStorage: { name: string; value: string }[];
-  }[];
-};
-function getStorageState(): string | TStorage {
-  console.log('log user');
-  return 'src/helper/auth/user.json';
+function getStorageState() {
+  const fileName = 'src/helper/auth/user.json';
+  if (fs.existsSync(fileName)) {
+    // Reuse existing authentication state if any.
+    return JSON.parse(fs.readFileSync(fileName, 'utf8'));
+  }
+  return undefined;
 }

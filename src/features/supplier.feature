@@ -1,7 +1,6 @@
 @ui @supplier @supplier_list
 Feature: Supplier page
 
-  # @auth
   # Scenario: User logged in successfully
   #   Given User access the system
   #   When User enters the email as "" and password as ""

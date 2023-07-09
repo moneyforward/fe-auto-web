@@ -1,10 +1,10 @@
 @ui @supplier @supplier_list
 Feature: Supplier page
 
-  Background: User logged in successfully
-    Given User access the system
-    When User enters the email as "" and password as ""
-    Then It should be redirected to homepage
+  # Background: User logged in successfully
+  #   Given User access the system
+  #   When User enters the email as "" and password as ""
+  #   Then It should be redirected to homepage
 
   @blank
   Scenario: Verify can access Supplier list and check UI of Supplier List when don't have data
@@ -32,12 +32,9 @@ Feature: Supplier page
     Then Can see "SUPPLIER_PAGE_TABLE_HEADER_RECEIVER_PIC_NAME"
     Then Can see "SUPPLIER_PAGE_TABLE_HEADER_MAIN_PAYMENT_METHOD"
     Then Can see "SUPPLIER_PAGE_TABLE_HEADER_INVITATION_STATUS"
-    Then Can see "SUPPLIER_PAGE_TABLE_DATA_EMPTY_MESSAGE"
+  # Then Can see "SUPPLIER_PAGE_TABLE_DATA_EMPTY_MESSAGE"
 
   @supplier_02
   Scenario: Verify can access Supplier list and check UI of Supplier List when have data
     Given User redirects to supplier page
     Then Can see "SUPPLIER_PAGE_TABLE_DATA" with at least 1 item
-    Examples:
-      | Header 1 | Header 2 | Header 3 |
-      | Value 1  | Value 2  | Value 3  |

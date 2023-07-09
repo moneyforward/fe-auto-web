@@ -1,19 +1,14 @@
 import { Locator, Page } from '@playwright/test';
 import WrapperPage from './WrapperPage';
 
-export class SupplierPage {
-  private base: WrapperPage;
+export class SupplierPage extends WrapperPage {
   private readonly openDrawerButton: Locator;
 
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.openDrawerButton = this.page.getByRole('button', {
       name: '取引先追加',
     });
-    this.base = new WrapperPage(this.page);
-  }
-
-  async goToPage() {
-    this.base.goToPage('/suppliers');
   }
 
   async openCreateSupplierModal() {

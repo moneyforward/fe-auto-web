@@ -27,7 +27,7 @@ const isHeadlessMode = process.env.HEADLESS_MODE
   : true;
 
 export const config = {
-  browser: process.env.browser || 'chromium',
+  browser: process.env.browser || 'chrome',
   browserOptions,
   IMG_THRESHOLD: { threshold: 0.4 },
   runHeadless: isHeadlessMode,

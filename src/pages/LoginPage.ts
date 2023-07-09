@@ -3,33 +3,22 @@ import loginSelector from '../locators/LOGIN_PAGE.json';
 import { envConfig } from '../support/config';
 import WrapperPage from './WrapperPage';
 
-export class LoginPage {
-  private base: WrapperPage;
+export class LoginPage extends WrapperPage {
   readonly loginWithMFid: Locator;
   readonly emailInput: Locator;
   readonly passwordInput: Locator;
   readonly agreeAndSignIn: Locator;
   readonly signInButton: Locator;
 
-  constructor(private page: Page) {
-    this.base = new WrapperPage(page);
-    this.loginWithMFid = this.page.locator(
+  constructor(page: Page) {
+    super(page);
+    this.loginWithMFid = page.locator(
       loginSelector.LOGIN_PAGE_LOGIN_WITH_BUTTON
     );
-    this.emailInput = this.page.locator(loginSelector.LOGIN_PAGE_EMAIL_INPUT);
-    this.passwordInput = this.page.locator(
-      loginSelector.LOGIN_PAGE_PASSWORD_INPUT
-    );
-    this.agreeAndSignIn = this.page.locator(
-      loginSelector.LOGIN_PAGE_AGREE_BUTTON
-    );
-    this.signInButton = this.page.locator(
-      loginSelector.LOGIN_PAGE_SUBMIT_BUTTON
-    );
-  }
-
-  async goToPage() {
-    await this.base.goToPage('/auth/login');
+    this.emailInput = page.locator(loginSelector.LOGIN_PAGE_EMAIL_INPUT);
+    this.passwordInput = page.locator(loginSelector.LOGIN_PAGE_PASSWORD_INPUT);
+    this.agreeAndSignIn = page.locator(loginSelector.LOGIN_PAGE_AGREE_BUTTON);
+    this.signInButton = page.locator(loginSelector.LOGIN_PAGE_SUBMIT_BUTTON);
   }
 
   async login(email: string, password: string) {
