@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
+import { envConfig } from '../../support/config';
 import loginSelector from '../locators/LOGIN_PAGE.json';
-import { envConfig } from '../support/config';
 import WrapperPage from './WrapperPage';
 
 export class LoginPage extends WrapperPage {

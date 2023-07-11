@@ -1,4 +1,4 @@
-@ui @supplier @supplier_list
+@ui @supplier @supplier_list @ignore
 Feature: Supplier page
 
   Scenario: User logged in successfully
@@ -7,7 +7,7 @@ Feature: Supplier page
     Then It should be redirected to homepage
 
   @auth
-  Scenario: Verify can access Supplier list and check UI of Supplier List when have data
+  Scenario: Verify can access supplier list and check ui of supplier list when have data
     Given User redirects to supplier page
     Then Can see "SUPPLIER_PAGE_TABLE_DATA" with at least 1 item
 

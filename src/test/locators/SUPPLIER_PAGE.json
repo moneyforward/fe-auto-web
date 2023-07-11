@@ -19,7 +19,7 @@
     "SUPPLIER_PAGE_IMPORT_BUTTON": "//span[(text()='取引先インポート')]/parent::button",
     "SUPPLIER_PAGE_TABLE_PREV_ARROW_PAGINATION": "//div[contains(@class, 'MainTable_paging') and position()=1]/nav/ul/li[position()=1]/button",
     "SUPPLIER_PAGE_TABLE_NEXT_ARROW_PAGINATION": "//div[contains(@class, 'MainTable_paging') and position()=1]/nav/ul/li[last()]/button",
-    "SUPPLIER_PAGE_TABLE_HEADER_SUPPLIER_CODE": "//div//table//thead//th//span[text()='取引先コード']",
+    "SUPPLIER_PAGE_TABLE_HEADER_SUPPLIER_CODE": "//div//table//thead//th[text()='取引先コード']",
     "SUPPLIER_PAGE_TABLE_HEADER_SUPPLIER_NAME": "//div//table//thead//th[text()='取引先名']",
     "SUPPLIER_PAGE_TABLE_HEADER_SUPPLIER_DEPT_NAME": "//div//table//thead//th[text()='取引先部門']",
     "SUPPLIER_PAGE_TABLE_HEADER_SUPPLIER_PIC_NAME": "//div//table//thead//th[text()='取引先担当者']",

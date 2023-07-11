@@ -1,6 +1,6 @@
 const config = {
-  paths: ['src/features/'],
-  require: ['src/support/hooks.ts', 'src/steps/**/*.ts'],
+  paths: ['src/test/features/'],
+  require: ['src/support/hooks.ts', 'src/test/steps/**/*.ts'],
   requireModule: ['ts-node/register'], // ts-node/register: solve the ts-import statement error
   format: [
     'json:test-results/cucumber-report-default.json',

@@ -1,0 +1,19 @@
+{
+    "EMPLOYEE_GROUP_PAGE_TITLE": "//title['受取部門一覧 | マネーフォワード クラウドインボイス [受領]']",
+    "EMPLOYEE_GROUP_PAGE_FILTER_CODE": "//div//form[@id='search']//div[text()='受取部門コード']",
+    "EMPLOYEE_GROUP_PAGE_FILTER_NAME": "//div//form[@id='search']//div[text()='受取部門名']",
+    "EMPLOYEE_GROUP_PAGE_FILTER_CLEAR_BUTTON": "//div//form[@id='search']//button/span[text()='クリア']",
+    "EMPLOYEE_GROUP_PAGE_DELETE_BUTTON": "//span[text()='削除']/parent::button",
+    "EMPLOYEE_GROUP_PAGE_ADD_BUTTON": "//span[text()='受取部門追加']/parent::button",
+    "EMPLOYEE_GROUP_TABLE_HEADER_EG_CHECKBOX": "//div//table//thead//th//input[@type='checkbox']",
+    "EMPLOYEE_GROUP_TABLE_HEADER_EG_CODE": "//div//table//thead//th//span[text()='受取部門コード']",
+    "EMPLOYEE_GROUP_TABLE_HEADER_EG_NAME": "//div//table//thead//th[text()='受取部門名']",
+    "EMPLOYEE_GROUP_TABLE_HEADER_BELONG_EMPLOYEE": "//div//table//thead//th[text()='所属従業員']",
+    "EMPLOYEE_GROUP_PAGE_TABLE_DATA_EMPTY_MESSAGE": "//div//table//tr//div[text()='データが存在しません']",
+    "EMPLOYEE_GROUP_PAGE_HOVERING_TEXT_DELETE_BUTTON": "//div[@class='ant-tooltip' and not(@class='ant-tooltip-hidden')]//div[text()='有料契約いただくことでご利用が可能になる機能です']",
+    "EMPLOYEE_GROUP_PAGE_DRAWER_TITLE": "//div//div[@class='ant-drawer-header-title']//h2['受取部門追加']",
+    "EMPLOYEE_GROUP_PAGE_DRAWER_GROUP_CODE": "//input[@data-testid='group-code']",
+    "EMPLOYEE_GROUP_PAGE_DRAWER_GROUP_NAME": "//input[@data-testid='group-name']",
+    "EMPLOYEE_GROUP_PAGE_DRAWER_SUBMIT_BUTTON": "//div[@data-testid='employee_group-submit']//button",
+    "EMPLOYEE_GROUP_PAGE_TABLE_FIRST_ROW": "//div//table//tbody//tr"
+}

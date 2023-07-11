@@ -4,8 +4,8 @@
     "LOGIN_PAGE_LOGIN_WITH_BUTTON": "//div//button['マネーフォワードIDでログインする']",
     "LOGIN_PAGE_EMAIL_INPUT": "input[name='mfid_user[email]']",
     "LOGIN_PAGE_PASSWORD_INPUT": "input[name='mfid_user[password]']",
-    "LOGIN_PAGE_AGREE_BUTTON": "//input[@type='submit']",
-    "LOGIN_PAGE_SUBMIT_BUTTON": "//input[@type='submit']",
+    "LOGIN_PAGE_AGREE_BUTTON": "//button[@id='submitto']",
+    "LOGIN_PAGE_SUBMIT_BUTTON": "//button[@id='submitto']",
     "LOGIN_PAGE_FAILED_MESSAGE": "//div[contains(@class,'noticeBox')]//p['Invalid email or password.']",
     "LOGIN_PAGE_HOME_PAGE_TITLE": "請求書一覧 | マネーフォワード クラウドインボイス [受領]"
 }

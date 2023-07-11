@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { envConfig } from '../support/config';
+import { envConfig } from '../../support/config';
 
 export default class WrapperPage {
   page: Page;

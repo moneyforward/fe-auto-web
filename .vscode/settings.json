@@ -26,7 +26,8 @@
     "msedge",
     "viewports",
     "tbody",
-    "domcontentloaded"
+    "domcontentloaded",
+    "testid"
   ],
   // start: cucumber setting
 

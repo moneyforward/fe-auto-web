@@ -1,15 +1,16 @@
 import { Before, Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
+import { envConfig } from '../../../support/config';
+import { ICustomWorld } from '../../../support/custom-world';
 import pageLocator from '../../locators/LOGIN_PAGE.json';
 import { LoginPage } from '../../pages/LoginPage';
-import { envConfig } from '../../support/config';
 
 let loginPage: LoginPage;
-Before(function () {
+Before(function (this: ICustomWorld) {
   loginPage = new LoginPage(this.page!);
 });
 
-Given('User access the system', async function () {
+Given('User access the system', async function (this: ICustomWorld) {
   await loginPage.goToPage();
   await expect(this.page!).toHaveTitle(pageLocator.LOGIN_PAGE_TITLE);
 });
@@ -24,7 +25,12 @@ When(
   }
 );
 
-Then('It should be redirected to homepage', async function () {
-  await this.page!.waitForLoadState();
-  await expect(this.page!).toHaveTitle(pageLocator.LOGIN_PAGE_HOME_PAGE_TITLE);
-});
+Then(
+  'It should be redirected to homepage',
+  async function (this: ICustomWorld) {
+    await this.page!.waitForLoadState();
+    await expect(this.page!).toHaveTitle(
+      pageLocator.LOGIN_PAGE_HOME_PAGE_TITLE
+    );
+  }
+);

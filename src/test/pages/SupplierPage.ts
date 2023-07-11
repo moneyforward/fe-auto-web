@@ -6,7 +6,7 @@ export class SupplierPage extends WrapperPage {
 
   constructor(page: Page) {
     super(page);
-    this.openDrawerButton = this.page.getByRole('button', {
+    this.openDrawerButton = page.getByRole('button', {
       name: '取引先追加',
     });
   }
