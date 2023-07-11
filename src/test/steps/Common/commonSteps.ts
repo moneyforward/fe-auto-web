@@ -1,4 +1,5 @@
 import { Then, When } from '@cucumber/cucumber';
+import { faker } from '@faker-js/faker';
 import { expect } from '@playwright/test';
 import { ICustomWorld } from '../../../support/custom-world';
 import pageLocator from '../../locators';
@@ -33,7 +34,7 @@ Then(
 Then(
   'Can see {string}',
   async function (this: ICustomWorld, element: TypeKeyLocator) {
-    await this.page!.locator(pageLocator[element]).first().waitFor();
+    await this.page!.locator(pageLocator[element]).waitFor();
     await expect(this.page!.locator(pageLocator[element])).toBeVisible();
   }
 );
@@ -70,7 +71,15 @@ When(
 When(
   'User types {string} into {string}',
   async function (this: ICustomWorld, value: string, element: TypeKeyLocator) {
-    const el = await this.page!.$(pageLocator[element]);
-    await el?.fill(value);
+    const uuid = faker.string.uuid();
+    const el = this.page!.locator(pageLocator[element]);
+    await el?.fill(`${value}_${uuid}`);
+  }
+);
+
+Then(
+  '{string} is not displays',
+  async function (this: ICustomWorld, element: TypeKeyLocator) {
+    await expect(this.page!.locator(pageLocator[element])).not.toBeVisible();
   }
 );
