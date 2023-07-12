@@ -1,10 +1,23 @@
-import { Then, When } from '@cucumber/cucumber';
+import { Before, Given, Then, When } from '@cucumber/cucumber';
 import { faker } from '@faker-js/faker';
 import { expect } from '@playwright/test';
 import { ICustomWorld } from '../../../support/custom-world';
 import pageLocator from '../../locators';
+import WrapperPage from '../../pages/WrapperPage';
 
 type TypeKeyLocator = keyof typeof pageLocator;
+let pageWrapper: WrapperPage;
+
+Before(function (this: ICustomWorld) {
+  pageWrapper = new WrapperPage(this.page!);
+});
+
+Given(
+  'User redirects to {string}',
+  async function (this: ICustomWorld, pageName: string) {
+    pageWrapper.goToPage(pageName);
+  }
+);
 
 Then(
   'Can see {string} with at least {int} item',
@@ -16,21 +29,36 @@ Then(
   }
 );
 
+/**
+ * toBeDisabled(): Element is disabled if it has "disabled" attribute or is disabled via 'aria-disabled
+ */
 Then(
-  'Can see {string}, and it is {string}',
-  async function (
-    this: ICustomWorld,
-    element: TypeKeyLocator,
-    toggle: boolean
-  ) {
-    if (toggle) {
-      await expect(this.page!.locator(pageLocator[element])).toBeEnabled();
-    } else {
-      await expect(this.page!.locator(pageLocator[element])).toBeDisabled();
-    }
+  'Can see {string} and it is {string}',
+  async function (this: ICustomWorld, element: TypeKeyLocator, toggle: string) {
+    await expect(
+      this.page!.locator(
+        `${pageLocator[element]}[@data-disabled="${
+          toggle === 'disabled' ? 'true' : 'false'
+        }"]`
+      )
+    ).toBeVisible();
   }
 );
 
+Then(
+  'Can see {string} and it contains {string} in class name',
+  async function (this: ICustomWorld, element: TypeKeyLocator, toggle: string) {
+    await expect(
+      this.page!.locator(
+        `${pageLocator[element]}[contains(@class, ${
+          toggle === 'disabled' ? 'isDisabled' : ''
+        })]`
+      )
+    ).toBeVisible();
+  }
+);
+
+// display === define (but define !== display)
 Then(
   'Can see {string}',
   async function (this: ICustomWorld, element: TypeKeyLocator) {
@@ -39,29 +67,37 @@ Then(
   }
 );
 
+// element is not show on page, but show on DOM
 Then(
-  '{string} should be defined and not displays on the DOM',
+  '{string} is present',
   async function (this: ICustomWorld, element: TypeKeyLocator) {
     expect(this.page!.locator(pageLocator[element])).toBeDefined();
   }
 );
 
+// element is not show on DOM == not defined
 Then(
-  'Can see tooltip {string} when hovering on delete button with text {string}',
+  '{string} is not displays',
+  async function (this: ICustomWorld, element: TypeKeyLocator) {
+    await expect(this.page!.locator(pageLocator[element])).not.toBeVisible();
+  }
+);
+Then(
+  'Can see tooltip {string} when hovering on {string} element',
   async function (
     this: ICustomWorld,
     tooltip: TypeKeyLocator,
     element: TypeKeyLocator
   ) {
-    const deleteButton = await this.page!.$(pageLocator[element]);
-    await deleteButton!.hover();
+    const el = await this.page!.$(pageLocator[element]);
+    await el!.hover();
 
     expect(this.page!.locator(pageLocator[tooltip])).toBeDefined();
   }
 );
 
 When(
-  'User clicks on {string}',
+  'User clicks on {string} element',
   async function (this: ICustomWorld, element: TypeKeyLocator) {
     const el = this.page!.locator(pageLocator[element]);
     await el.click();
@@ -74,12 +110,5 @@ When(
     const uuid = faker.string.uuid();
     const el = this.page!.locator(pageLocator[element]);
     await el?.fill(`${value}_${uuid}`);
-  }
-);
-
-Then(
-  '{string} is not displays',
-  async function (this: ICustomWorld, element: TypeKeyLocator) {
-    await expect(this.page!.locator(pageLocator[element])).not.toBeVisible();
   }
 );

@@ -1,12 +1,31 @@
-import { Before, Given } from '@cucumber/cucumber';
+import { Before, Then, When } from '@cucumber/cucumber';
+import { faker } from '@faker-js/faker';
+import { expect } from '@playwright/test';
 import { ICustomWorld } from '../../../support/custom-world';
-import { SupplierPage } from '../../pages/SupplierPage';
+import pageLocator from '../../locators/SUPPLIER_PAGE.json';
 
-let supplierPage: SupplierPage;
+type TypeKeyLocator = keyof typeof pageLocator;
+let fakeId: string;
+
 Before(function (this: ICustomWorld) {
-  supplierPage = new SupplierPage(this.page!);
+  fakeId = faker.string.uuid();
 });
 
-Given('User redirects to supplier page', async function () {
-  await supplierPage.goToPage('/suppliers');
-});
+When(
+  'User types {string} into {string} field in supplier page',
+  async function (this: ICustomWorld, value: string, element: TypeKeyLocator) {
+    const el = await this.page!.$(pageLocator[element]);
+    await el?.fill(`${value}_${fakeId}`);
+  }
+);
+
+Then(
+  '{string} displays on the first row of supplier listing',
+  async function (this: ICustomWorld, value: string) {
+    expect(
+      await this.page!.$(
+        `//div//table//tbody//tr//td//div[text()=${value}_${fakeId}]`
+      )
+    );
+  }
+);

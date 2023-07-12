@@ -1,7 +1,7 @@
 {
     "SUPPLIER_PAGE_SUPPLIER_TITLE": "//title['取引先一覧 | マネーフォワード クラウドインボイス [受領]']",
     "SUPPLIER_PAGE_SUB_HEADER_TITLE": "//div//div//h2[text()='取引先']",
-    "SUPPLIER_PAGE_TPM_BUTTON": "//div//button/span[text()='登録番号の取得・適用']",
+    "SUPPLIER_PAGE_TPM_BUTTON": "//div//button/span[text()='登録番号の取得・適用']/parent::button",
     "SUPPLIER_PAGE_FILTER_SUPPLIER_CODE": "//div//form[@id='search']//div[text()='取引先コード']",
     "SUPPLIER_PAGE_FILTER_DROPDOWN_SUPPLIER_CODE_FIRST_OPTION": "//div//form[@id='search']//div[text()='取引先コード']/parent::div/parent::div//span[@class='ant-select-selection-item' and @title='全て']",
     "SUPPLIER_PAGE_FILTER_SUPPLIER_NAME": "//div//form[@id='search']//div[text()='取引先名']",
@@ -28,5 +28,13 @@
     "SUPPLIER_PAGE_TABLE_HEADER_MAIN_PAYMENT_METHOD": "//div//table//thead//th[text()='メインの支払方法']",
     "SUPPLIER_PAGE_TABLE_HEADER_INVITATION_STATUS": "//div//table//thead//th[text()='招待ステータス']",
     "SUPPLIER_PAGE_TABLE_DATA_EMPTY_MESSAGE": "//div//table//tr//div[text()='データが存在しません']",
-    "SUPPLIER_PAGE_TABLE_DATA": "//div//table//tbody//tr"
+    "SUPPLIER_PAGE_TABLE_DATA": "//div//table//tbody//tr",
+    "SUPPLIER_PAGE_DRAWER_CREATE_TITLE": "//div//div[@class='ant-drawer-header-title']//h2[text()='取引先追加']",
+    "SUPPLIER_PAGE_DRAWER_UPDATE_TITLE": "//div//div[@class='ant-drawer-header-title']//h2[text()='取引先編集']",
+    "SUPPLIER_PAGE_DRAWER_SUPPLIER_NAME_TITLE": "//form[@id='supplier']//div[text()='取引先名']",
+    "SUPPLIER_PAGE_DRAWER_SUPPLIER_NAME_FIELD": "//form[@id='supplier']//input[@data-testid='supplier-name']",
+    "SUPPLIER_PAGE_DRAWER_SUPPLIER_NAME_FIELD_PLACEHOLDER": "//form[@id='supplier']//input[@data-testid='supplier-name' and @placeholder='入力してください']",
+    "SUPPLIER_PAGE_DRAWER_SUBMIT_BUTTON": "//form[@id='supplier']//button[@data-testid='supplier-submit']",
+    "SUPPLIER_PAGE_CREATE_SUCCESS_TOAST_MESSAGE": "//div[text()='取引先を追加しました']",
+    "SUPPLIER_PAGE_UPDATE_SUCCESS_TOAST_MESSAGE": "//div[text()='取引先の情報を変更しました']"
 }

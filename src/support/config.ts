@@ -18,7 +18,8 @@ const browserOptions: LaunchOptions = {
 export const envConfig = {
   email: process.env.EMAIL || 'nguyen.tuan.dat+autotest01@moneyforward.vn',
   password: process.env.PASSWORD || 'e@dqYvPqY5!F8hhS',
-  baseUrl: process.env.BASE_URL || 'https://payable-invoice.test.mfw.work',
+  // remember "/" at the end
+  baseUrl: process.env.BASE_URL || 'https://payable-invoice.test.mfw.work/',
   baseUrlAPI: process.env.BASE_URL_API || '',
 };
 

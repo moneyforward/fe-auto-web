@@ -22,7 +22,7 @@
     "EMPLOYEE_GROUP_PAGE_DRAWER_SUBMIT_BUTTON": "//div[@data-testid='employee_group-submit']//button",
     "EMPLOYEE_GROUP_PAGE_DRAWER_CLOSE_BUTTON": "//div//button[@class='ant-drawer-close']",
     "EMPLOYEE_GROUP_PAGE_DRAWER_EMPLOYEE_SECTION_TITLE": "//section[@data-testid='employee-section']//h3['従業員']",
-    "EMPLOYEE_GROUP_PAGE_DRAWER_EMPLOYEE_SECTION_BUTTON": "//section[@data-testid='employee-section']//button['追加']",
+    "EMPLOYEE_GROUP_PAGE_DRAWER_EMPLOYEE_SECTION_BUTTON": "//section[@data-testid='employee-section']//button[@data-testid='btn-add']",
     "EMPLOYEE_GROUP_PAGE_DRAWER_EMPLOYEE_SECTION_TABLE_EMPTY_MESSAGE": "//section[@data-testid='employee-section']//table/tbody/tr//div['受取部門に所属する従業員を追加してください']",
-    "EMPLOYEE_GROUP_PAGE_SUCCESS_TOAST_MESSAGE": "//div[text()='受取部門を追加しました']"
+    "EMPLOYEE_GROUP_PAGE_CREATE_SUCCESS_TOAST_MESSAGE": "//div[text()='受取部門を追加しました']"
 }
