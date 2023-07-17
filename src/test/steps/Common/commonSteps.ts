@@ -1,5 +1,4 @@
 import { Before, Given, Then, When } from '@cucumber/cucumber';
-import { faker } from '@faker-js/faker';
 import { expect } from '@playwright/test';
 import { ICustomWorld } from '../../../support/custom-world';
 import pageLocator from '../../locators';
@@ -101,14 +100,26 @@ When(
   async function (this: ICustomWorld, element: TypeKeyLocator) {
     const el = this.page!.locator(pageLocator[element]);
     await el.click();
+    await this.page!.waitForTimeout(1000);
   }
 );
 
 When(
-  'User types {string} into {string}',
-  async function (this: ICustomWorld, value: string, element: TypeKeyLocator) {
-    const uuid = faker.string.uuid();
-    const el = this.page!.locator(pageLocator[element]);
-    await el?.fill(`${value}_${uuid}`);
+  'select option at the position {int} from {string} dropdown',
+  async function (
+    this: ICustomWorld,
+    position: number,
+    element: TypeKeyLocator
+  ) {
+    const dropdown = this.page!.locator(pageLocator[element]);
+    await dropdown.click();
+    console.log(position);
+  }
+);
+
+Then(
+  'Wait for {string} appears',
+  async function (this: ICustomWorld, element: TypeKeyLocator) {
+    await this.page!.waitForSelector(pageLocator[element]);
   }
 );

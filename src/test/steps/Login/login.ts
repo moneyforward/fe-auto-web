@@ -12,7 +12,7 @@ Before(function (this: ICustomWorld) {
 
 Given('User access the system', async function (this: ICustomWorld) {
   await loginPage.goToPage();
-  await expect(this.page!).toHaveTitle(pageLocator.LOGIN_PAGE_TITLE);
+  await expect(this.page!).toHaveTitle(pageLocator.LOGIN_PAGE_HOME_PAGE_TITLE);
 });
 
 When(

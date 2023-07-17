@@ -33,7 +33,7 @@ commands:
             curl -L -X GET "${requestURL}"
 
 jobs:
-  kl-automation-test:
+  klavis-automation-test:
     machine: true
     resource_class: moneyforwardvietnam/qa-runner
     steps:
@@ -65,9 +65,8 @@ jobs:
 workflows:
   kl-workflow:
     jobs:
-      - kl-automation-test:
+      - klavis-automation-test:
           filters:
             branches:
               only:
                 - main
-                - update-setting-v.0.2

@@ -6,6 +6,8 @@ export interface ICustomWorld extends World {
   context?: BrowserContext;
   page?: Page;
   server?: APIRequestContext;
+  startTime?: Date;
+  testName?: string;
 }
 
 export class CustomWorld extends World implements ICustomWorld {
