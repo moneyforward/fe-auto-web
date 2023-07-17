@@ -18,15 +18,32 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["signin", "mfid", "Prefs", "thead", "msedge", "viewports"],
-  // start: cucumberautocomplete setting
+  "cSpell.words": [
+    "signin",
+    "mfid",
+    "Prefs",
+    "thead",
+    "msedge",
+    "viewports",
+    "tbody",
+    "domcontentloaded",
+    "testid"
+  ],
+  // start: cucumber setting
+
+  "cucumber.features": ["src/features/*.feature"],
+  "cucumber.glue": ["src/steps/**/*.ts"],
+
+  // "cucumber.features": ["src/features/*.feature"],
+  // "cucumber.glue": ["src/steps/**/*.ts"],
+  // start: cucumber setting
   "editor.quickSuggestions": {
     "comments": false,
     "strings": true,
     "other": true
   },
-  "cucumberautocomplete.steps": ["tests/steps/**/*.ts"],
-  "cucumberautocomplete.syncfeatures": "tests/features/*.feature",
+  "cucumberautocomplete.steps": ["src/steps/**/*.ts"],
+  "cucumberautocomplete.syncfeatures": "src/features/*.feature",
   "cucumberautocomplete.strictGherkinCompletion": true,
   "cucumberautocomplete.customParameters": [
     {
@@ -37,7 +54,6 @@
   "cucumberautocomplete.strictGherkinValidation": true,
   "cucumberautocomplete.smartSnippets": true,
   "cucumberautocomplete.stepsInvariants": true,
-
   "cucumberautocomplete.skipDocStringsFormat": true,
   "cucumberautocomplete.formatConfOverride": {
     "And": 3,
@@ -45,6 +61,9 @@
   },
   "cucumberautocomplete.onTypeFormat": true,
   "cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
-  "cucumberautocomplete.stepRegExSymbol": "'"
+  "cucumberautocomplete.stepRegExSymbol": "'",
   // end: cucumberautocomplete setting
+  "[feature]": {
+    "editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
+  }
 }

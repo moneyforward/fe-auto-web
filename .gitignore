@@ -4,4 +4,5 @@ node_modules/
 /playwright/.cache/
 .auth/
 .env
+package-lock.json
 /reports
