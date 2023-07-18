@@ -107,9 +107,13 @@ After(async function (
       .split('.')[0]
       .replaceAll(':', '_');
 
-    await this.context?.tracing.stop({
+    await this.context!.tracing.stop({
       path: `test-results/traces/${this.testName}-${timePart}trace.zip`,
     });
+    const file = await fs.readFileSync(
+      `test-results/traces/${this.testName}-${timePart}trace.zip`
+    );
+    this.attach(file, 'zip');
   }
   await this.page!.close();
   await this.context!.close();
