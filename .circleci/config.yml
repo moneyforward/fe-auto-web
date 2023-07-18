@@ -63,7 +63,7 @@ jobs:
           slackWebHookId: 'B05FH8MAH8D/Ym1j8Q1QGUrFMSN2jEDOZFp3'
 
 workflows:
-  kl-workflow:
+  klavis-workflow:
     jobs:
       - klavis-automation-test:
           filters:
