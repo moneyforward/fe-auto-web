@@ -33,7 +33,7 @@ commands:
             curl -L -X GET "${requestURL}"
 
 jobs:
-  klavis-automation-test:
+  rci-automation-test:
     machine: true
     resource_class: moneyforwardvietnam/qa-runner
     steps:
@@ -63,9 +63,9 @@ jobs:
           slackWebHookId: 'B05FH8MAH8D/Ym1j8Q1QGUrFMSN2jEDOZFp3'
 
 workflows:
-  klavis-workflow:
+  rci-workflow:
     jobs:
-      - klavis-automation-test:
+      - rci-automation-test:
           filters:
             branches:
               only:
