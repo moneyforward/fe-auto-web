@@ -1,11 +1,12 @@
-@ui @employee_group
+@ui @employee_group @auth
 Feature: Employee group page
 
-  Background: User logged in successfully
-    Given User access the system
-    When User enters the email as "" and password as ""
-    Then It should be redirected to homepage
+  # Background: User logged in successfully
+  #   Given User access the system
+  #   When User enters the email as "" and password as ""
+  #   Then It should be redirected to homepage
 
+  @eg01
   Scenario: Verify can create new EG with only required field
     Given User redirects to "employee_groups"
     When User clicks on "EMPLOYEE_GROUP_PAGE_ADD_BUTTON" element
@@ -28,8 +29,8 @@ Feature: Employee group page
       And Can see "EMPLOYEE_GROUP_PAGE_DRAWER_EMPLOYEE_SECTION_BUTTON" and it is "disabled"
       # + name table shows text when there is no data <受取部門に所属する従業員を追加してください> (please add employee belonging to this EG)
       And Can see "EMPLOYEE_GROUP_PAGE_DRAWER_EMPLOYEE_SECTION_TABLE_EMPTY_MESSAGE"
-    # + have <氏名> (name) table below the dropdown
-    # And "<EG_Name>" displays on the first row of employee group listing
+      # + have <氏名> (name) table below the dropdown
+      And "<EG_Name>" displays "randomly" on the first row of employee group listing
     Examples:
       | EG_Name |
       | EG01    |

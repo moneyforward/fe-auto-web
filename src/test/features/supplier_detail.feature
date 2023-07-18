@@ -1,14 +1,15 @@
-@ui @supplier @supplier_detail
+@ui @supplier @supplier_detail @auth
 Feature: Supplier page
 
-  Background: User logged in successfully
-    Given User access the system
-    When User enters the email as "" and password as ""
-    Then It should be redirected to homepage
+  # Background: User logged in successfully
+  #   Given User access the system
+  #   When User enters the email as "" and password as ""
+  #   Then It should be redirected to homepage
 
   @s01
   Scenario: Verify can access Edit Supplier and check UI of Supplier detail
     Given User redirects to "suppliers"
+    When User clicks on "SUPPLIER_PAGE_ADD_BUTTON" element
     Then Can see "SUPPLIER_PAGE_DRAWER_CREATE_TITLE"
       And Can see "SUPPLIER_PAGE_DRAWER_SUPPLIER_CODE_TITLE"
       And Can see "SUPPLIER_PAGE_DRAWER_SUPPLIER_CODE_FIELD"
