@@ -1,10 +1,10 @@
-@ui @supplier @supplier_detail @auth
+@ui @supplier @supplier_detail
 Feature: Supplier page
 
-  # Background: User logged in successfully
-  #   Given User access the system
-  #   When User enters the email as "" and password as ""
-  #   Then It should be redirected to homepage
+  Background: User logged in successfully
+    Given User access the system
+    When User enters the email as "" and password as ""
+    Then It should be redirected to homepage
 
   @s01
   Scenario: Verify can access Edit Supplier and check UI of Supplier detail
