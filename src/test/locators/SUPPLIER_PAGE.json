@@ -1,7 +1,7 @@
 {
     "SUPPLIER_PAGE_SUPPLIER_TITLE": "//title['取引先一覧 | マネーフォワード クラウドインボイス [受領]']",
     "SUPPLIER_PAGE_SUB_HEADER_TITLE": "//h2[text()='取引先']",
-    "SUPPLIER_PAGE_TPM_BUTTON": "//button/span[text()='登録番号の取得・適用']",
+    "SUPPLIER_PAGE_TPM_BUTTON": "//button/span[text()='登録番号の取得・適用']/parent::button",
     "SUPPLIER_PAGE_FILTER_SUPPLIER_CODE": "//form[@id='search']//div[text()='取引先コード']",
     "SUPPLIER_PAGE_FILTER_DROPDOWN_SUPPLIER_CODE_FIRST_OPTION_SELECTED": "//div[@data-testid='search-code']//span[@title='全て']",
     "SUPPLIER_PAGE_FILTER_DROPDOWN_SUPPLIER_CODE_FIRST_OPTION": "//div[@data-testid='search-code']//div[@title='全て']",
