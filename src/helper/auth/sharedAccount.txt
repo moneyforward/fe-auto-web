@@ -1,7 +1,0 @@
-Account with data
-email:nguyen.tuan.dat+autotest04@moneyforward.vn
-password:nQ26F8^bGJmUGBI6
-
-Account with empty data, use for filtering
-email:nguyen.tuan.dat+01@moneyforward.vn
-password:e@dqYvPqY5!F8hhS

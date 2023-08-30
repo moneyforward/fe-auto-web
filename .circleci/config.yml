@@ -70,3 +70,4 @@ workflows:
             branches:
               only:
                 - main
+                - api
