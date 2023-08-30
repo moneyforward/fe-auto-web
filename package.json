@@ -5,8 +5,7 @@
     "main": "index.js",
     "scripts": {
         "pretest": "npx ts-node src/helper/report/init.ts",
-        "test": "cucumber-js --tags \"not @login\" || true",
-        "api": "npx playwright test --reporter=dot",
+        "test": "npx playwright test --reporter=dot",
         "posttest": "npx ts-node src/helper/report/report.ts"
     },
     "keywords": [],
