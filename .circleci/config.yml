@@ -39,6 +39,7 @@ jobs:
     steps:
       - node/install
       - checkout
+      - run: copy .env.local .env
       - run: node --version
       - run: npm i -D @playwright/test
       - run: npx playwright install
