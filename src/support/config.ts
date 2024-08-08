@@ -16,8 +16,8 @@ const browserOptions: LaunchOptions = {
 };
 
 export const envConfig = {
-  email: process.env.EMAIL || 'nguyen.tuan.dat@moneyforward.vn',
-  password: process.env.PASSWORD || 'iLR0x@zPE6NT',
+  email: process.env.EMAIL || '',
+  password: process.env.PASSWORD || '',
   baseUrl: process.env.BASE_URL || 'https://payable-invoice.test.mfw.work',
   baseUrlAPI: process.env.BASE_URL_API || '',
 };
